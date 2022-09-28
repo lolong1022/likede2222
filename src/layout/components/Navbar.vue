@@ -3,12 +3,16 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" mode="horizontal" trigger="hover">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
-          <span>欢迎您</span>
+          <img
+            src="~@/assets/common/user.png"
+            class="user-avatar"
+          >
+          <div>欢迎您, admin</div>
+          <span>退出</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu class="cccc">
-          退出登录
+          <span @click="logout">退出登录</span>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -29,25 +33,42 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
+      console.log(111)
       await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      this.$router.push(`/login`)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .cccc{
-    background-color: aqua;
+.cccc{
+  background-color: #333;
+  width: 80px;
+  height: 30px;
+  text-align: center;
+  line-height: 5px;
+  span {
+    color: #fff;
+    font-size: 12px;
   }
+}
+::v-deep.el-popper[x-placement^=bottom] .popper__arrow:after {
+    top: 1px;
+    margin-left: 18px;
+    border-top-width: 0;
+    border-bottom-color: #333 !important;
+}
 .navbar {
-  height: 50px;
-  overflow: hidden;
-  position: relative;
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
   background:url('~@/assets/common/backgroundone.png');
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
   .hamburger-container {
-    line-height: 46px;
+    line-height: 56px;
     height: 100%;
     float: left;
     cursor: pointer;
@@ -66,7 +87,8 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    line-height: 50px;
+    line-height: 60px;
+    margin-right: 30px;
 
     &:focus {
       outline: none;
@@ -76,21 +98,27 @@ export default {
       margin-right: 30px;
 
       .avatar-wrapper {
-        margin-top: 5px;
         position: relative;
+        // 开启flex
+        display: flex;
+        align-items: center;
+        color: #fff;
+        div{
+          margin-right: 15px;
+        }
 
         .user-avatar {
           cursor: pointer;
           width: 40px;
           height: 40px;
           border-radius: 10px;
+          margin-right: 15px;
         }
 
         .el-icon-caret-bottom {
           cursor: pointer;
           position: absolute;
           right: -20px;
-          top: 15px;
           font-size: 18px;
           color: #fff;
         }
