@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
-    <div class="right-menu">
-      <el-dropdown class="avatar-container" mode="horizontal" trigger="hover">
+    <div class="right-menu wecome">
+      <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img
             src="~@/assets/common/user.png"
@@ -9,11 +9,10 @@
           >
           <div>欢迎您, admin</div>
           <span>退出</span>
-          <i class="el-icon-caret-bottom" />
+          <el-tooltip class="item" effect="dark" content="退出登录" placement="bottom" :offset="18">
+            <i class="el-icon-caret-bottom" @click="logout" />
+          </el-tooltip>
         </div>
-        <el-dropdown-menu class="cccc">
-          <span @click="logout">退出登录</span>
-        </el-dropdown-menu>
       </el-dropdown>
     </div>
   </div>
@@ -42,23 +41,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cccc{
-  background-color: #333;
-  width: 80px;
-  height: 30px;
-  text-align: center;
-  line-height: 5px;
-  span {
-    color: #fff;
-    font-size: 12px;
-  }
-}
-::v-deep.el-popper[x-placement^=bottom] .popper__arrow:after {
-    top: 1px;
-    margin-left: 18px;
-    border-top-width: 0;
-    border-bottom-color: #333 !important;
-}
 .navbar {
   width: 100%;
   height: 60px;
@@ -118,7 +100,7 @@ export default {
         .el-icon-caret-bottom {
           cursor: pointer;
           position: absolute;
-          right: -20px;
+          right: -17px;
           font-size: 18px;
           color: #fff;
         }
